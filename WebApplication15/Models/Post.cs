@@ -12,10 +12,11 @@ namespace WebApplication15.Models
         [Key]
         public int Id { get; set; }
         [Required]
+        [Display(Name ="Category")]
         public int CategoryId { get; set; }
         public Category Category { get; set; }
-
-        public int UserId { get; set; }
+        [ScaffoldColumn(false)]
+        public string UserId { get; set; }
         public ApplicationUser User { get; set; }
         [Required]
         [StringLength(100)]
