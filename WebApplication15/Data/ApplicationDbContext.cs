@@ -14,6 +14,7 @@ namespace WebApplication15.Data
             : base(options)
         {
         }
-        public DbSet<WebApplication15.ViewsModels.Account> Account { get; set; }
+       public DbSet<Category> categories { get; set; }
+        public DbSet<Post> posts { get; set; }
     }
 }
