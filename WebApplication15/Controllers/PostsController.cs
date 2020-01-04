@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebApplication15.Data;
+using WebApplication15.Helper;
 using WebApplication15.Models;
 
 namespace WebApplication15.Controllers
@@ -13,10 +14,14 @@ namespace WebApplication15.Controllers
     public class PostsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        
+        private IHostingEnvironment _environment;
 
-        public PostsController(ApplicationDbContext context)
+        
+        public PostsController(ApplicationDbContext context, IHostingEnvironment environment)
         {
             _context = context;
+            _environment = environment;
         }
 
         // GET: Posts
@@ -59,11 +64,11 @@ namespace WebApplication15.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CategoryId,Subject,Body,PublicationDate,AuthorName,UrlImage")] Post post)
+        public async Task<IActionResult> Create([Bind("Id,CategoryId,Subject,Body,PublicationDate,AuthorName,UrlImage")] Post post, IFormFile myfile)
         {
             if (ModelState.IsValid)
             {
-                post.UrlImage = await UserFile;
+                post.UrlImage = await UserFile.UploadeNewImageAsync(post.UrlImage, myfile, _environment.WebRootPath, Properties.Resources.ImgFolder, 100, 100);
                 _context.Add(post);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

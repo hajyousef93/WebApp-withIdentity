@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -42,7 +43,7 @@ namespace WebApplication15.Helper
         {
             using (var stream = new MemoryStream())
             {
-                current.Save(stream, current.RawFormat);
+                current.Save(stream, ImageFormat.Jpeg);
                 return stream.ToArray();
             }
         }

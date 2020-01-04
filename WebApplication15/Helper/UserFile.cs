@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -58,6 +59,11 @@ namespace WebApplication15.Helper
                 return newfilename;
             }
             return oldFileNameToBeDeleted;
+        }
+
+        internal static Task<string> UploadeNewImageAsync(string urlImage, IFormFile myfile, string webRootPath, object imgFolder, int v1, int v2)
+        {
+            throw new NotImplementedException();
         }
 
         internal static Task<string> UploadeNewImageAsync(string imageUrl, IFormFile myfile, object webRootPath, object imgFolder, int v1, int v2)
