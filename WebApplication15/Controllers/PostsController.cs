@@ -63,6 +63,7 @@ namespace WebApplication15.Controllers
         {
             if (ModelState.IsValid)
             {
+                post.UrlImage = await UserFile;
                 _context.Add(post);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
