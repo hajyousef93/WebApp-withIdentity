@@ -30,10 +30,23 @@ namespace WebApplication15.Controllers
         }
 
         // GET: Posts
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? id)
         {
-            var applicationDbContext = _context.posts.Include(p => p.Category).Include(p => p.User);
-            return View(await applicationDbContext.ToListAsync());
+            var applicationDbContext = new object();
+            if (id > 0)
+            {
+                applicationDbContext = _context.posts
+                    .Include(p => p.Category)
+                    .Include(p => p.User)
+                    .Where(p => p.CategoryId == id)
+                    .OrderBy(p => p.Id);
+            }
+            else
+            {
+                applicationDbContext = _context.posts.Include(p => p.Category).Include(p => p.User);
+                
+            }
+            return View(await((IQueryable<Post>) applicationDbContext).ToListAsync());
         }
 
         // GET: Posts/Details/5

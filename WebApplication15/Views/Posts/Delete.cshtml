@@ -50,8 +50,10 @@
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.UrlImage)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UrlImage)
+        <dd class="col-sm-10">
+            @*Html.DisplayFor(model => model.UrlImage)*@
+            <img class="img-fluid" src="@Url.Content("~/"+WebApplication15.Properties.Resources.ImgFolder+"/" + Model.UrlImage)" width="150" height="90" />
+
         </dd>
     </dl>
     
