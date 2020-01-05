@@ -16,5 +16,6 @@ namespace WebApplication15.Data
         }
        public DbSet<Category> categories { get; set; }
         public DbSet<Post> posts { get; set; }
+        public DbSet<WebApplication15.ViewsModels.RoleViewsModels> RoleViewsModels { get; set; }
     }
 }
